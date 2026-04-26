@@ -1,0 +1,194 @@
+{
+  "providers": {
+    "volcengine-plan": {
+      "baseUrl": "https://ark.cn-beijing.volces.com/api/coding/v3",
+      "apiKey": "48874b67-dcfe-433a-9a20-a62e1992deb0",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "ark-code-latest",
+          "name": "ark-code-latest",
+          "input": [
+            "text",
+            "image"
+          ],
+          "contextWindow": 256000,
+          "maxTokens": 32000,
+          "reasoning": false,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "api": "openai-completions"
+        },
+        {
+          "id": "doubao-seed-code",
+          "name": "doubao-seed-code",
+          "input": [
+            "text",
+            "image"
+          ],
+          "contextWindow": 256000,
+          "maxTokens": 32000,
+          "reasoning": false,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "api": "openai-completions"
+        },
+        {
+          "id": "glm-4.7",
+          "name": "glm-4.7",
+          "input": [
+            "text"
+          ],
+          "contextWindow": 200000,
+          "maxTokens": 128000,
+          "reasoning": false,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "api": "openai-completions"
+        },
+        {
+          "id": "deepseek-v3.2",
+          "name": "deepseek-v3.2",
+          "contextWindow": 128000,
+          "maxTokens": 32000,
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "api": "openai-completions"
+        },
+        {
+          "id": "doubao-seed-2.0-code",
+          "name": "doubao-seed-2.0-code",
+          "input": [
+            "text",
+            "image"
+          ],
+          "contextWindow": 256000,
+          "maxTokens": 128000,
+          "reasoning": false,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "api": "openai-completions"
+        },
+        {
+          "id": "doubao-seed-2.0-pro",
+          "name": "doubao-seed-2.0-pro",
+          "input": [
+            "text",
+            "image"
+          ],
+          "contextWindow": 256000,
+          "maxTokens": 128000,
+          "reasoning": false,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "api": "openai-completions"
+        },
+        {
+          "id": "doubao-seed-2.0-lite",
+          "name": "doubao-seed-2.0-lite",
+          "input": [
+            "text",
+            "image"
+          ],
+          "contextWindow": 256000,
+          "maxTokens": 128000,
+          "reasoning": false,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "api": "openai-completions"
+        },
+        {
+          "id": "minimax-m2.5",
+          "name": "minimax-m2.5",
+          "input": [
+            "text"
+          ],
+          "contextWindow": 200000,
+          "maxTokens": 128000,
+          "reasoning": false,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "api": "openai-completions"
+        },
+        {
+          "id": "kimi-k2.5",
+          "name": "kimi-k2.5",
+          "input": [
+            "text",
+            "image"
+          ],
+          "contextWindow": 256000,
+          "maxTokens": 32000,
+          "reasoning": false,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "api": "openai-completions"
+        }
+      ]
+    },
+    "ark": {
+      "baseUrl": "https://ark.cn-beijing.volces.com/api/v3",
+      "apiKey": "48874b67-dcfe-433a-9a20-a62e1992deb0",
+      "api": "openai-completions",
+      "models": [
+        {
+          "id": "doubao-1-5-lite-32k-250115",
+          "name": "doubao-1-5-lite-32k-250115",
+          "input": [
+            "text"
+          ],
+          "contextWindow": 32000,
+          "maxTokens": 12000,
+          "reasoning": false,
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "api": "openai-completions"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,68 @@
+# 语义层配置（北极星指标，与SQL模板、数据库表完全匹配）
+# 基础配置
+version: "1.0"
+database: polaris_db  # 与.env中DB_NAME一致
+default_table: fact_polaris_daily  # 默认事实表
+
+# 指标配置（固化指标口径，与SQL模板中指标逻辑一致）
+metrics:
+  gmv:
+    name: GMV
+    description: 北极星指标，口径为付款金额-退款金额（已剔除取消订单）
+    sql_expr: SUM(gmv)  # 与SQL模板中GMV计算逻辑一致
+    aggregate: sum      # 聚合方式，固定sum
+    data_type: decimal  # 数据类型
+    template: "/root/.openclaw/workspace-static/templates/gmv_abnormal.sql"  # 关联异动分析模板
+    alias: "GMV(万元)"  # 展示别名
+
+  order_cnt:
+    name: 订单量
+    description: 实际支付成功的订单数量（剔除取消、退款订单）
+    sql_expr: SUM(order_cnt)
+    aggregate: sum
+    data_type: int
+    template: "/root/.openclaw/workspace-static/templates/gmv_dimension.sql"  # 关联维度拆解模板
+    alias: "订单量（单）"
+
+  price_per:
+    name: 客单价
+    description: 客单价=GMV/订单量，处理订单量为0的异常场景
+    sql_expr: ROUND(IF(SUM(order_cnt)=0, 0, SUM(gmv)/SUM(order_cnt)), 2)
+    aggregate: avg
+    data_type: decimal
+    alias: "客单价（元）"
+
+# 维度配置（固化维度映射，与数据库字段、SQL模板一致）
+dimensions:
+  dt:
+    name: 日期
+    sql_field: dt  # 对应事实表dt字段
+    date_format: '%Y-%m-%d'  # 固化日期格式
+    hierarchy: [year, month, day]  # 时间维度层级
+    values: []  # 动态时间，无需固定枚举值
+
+  channel:
+    name: 渠道
+    sql_field: channel  # 对应事实表channel字段
+    values: [电商, 门店, 分销]  # 固化渠道枚举值，与SQL模板一致
+    template_param: "channel_list"  # 对应SQL模板中的动态参数
+
+  province:
+    name: 省份
+    sql_field: province  # 对应事实表province字段
+    values: [广东, 浙江, 江苏]  # 固化省份枚举值，与测试数据、模板一致
+    template_param: "province_list"
+
+# 时间筛选配置（固化常用时间条件，适配SQL模板）
+time_filters:
+  近7天: dt >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+  近30天: dt >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+  本月: DATE_FORMAT(dt,'%Y-%m')=DATE_FORMAT(CURDATE(),'%Y-%m')
+  上月: DATE_FORMAT(dt,'%Y-%m')=DATE_FORMAT(DATE_SUB(CURDATE(),INTERVAL 1 MONTH),'%Y-%m')
+
+# 表关联配置（固化多表JOIN逻辑，与SQL模板一致）
+joins:
+  - table: dim_channel  # 关联渠道维度表
+    type: LEFT JOIN     # 固化关联方式
+    on: fact_polaris_daily.channel = dim_channel.channel_name  # 固化关联字段
+    alias: dim_channel  # 表别名
